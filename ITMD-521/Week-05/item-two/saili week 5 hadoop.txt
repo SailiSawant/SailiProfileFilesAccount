@@ -1,0 +1,29 @@
+vagrant ssh
+
+cat 1990-sample.txt 1991-sample.txt 1991-sample.txt 1992-sample.txt 1993-sample.txt > 90919293.txt  - ReName this file 
+
+
+hadoop fs -mkdir -p spg/ncdc/90919293/
+hadoop fs -copyFromLocal 90919293.txt spg/ncdc/90919293
+
+/hadoop-book/ch02-intro/src/main/java cp MaxTemperature*.java ~/   .....this will copy all maxtemp java files
+
+cd ~
+
+ls
+
+vi MaxTemperatureMapper.java  .....Whereever there is temperature change to visibility...
+
+Same for MaxTemperatureReducer.java  ....MaxTemperature.java and MaxTemperatureWithCombiner.java
+
+mv MaxTemperatureMapper.java MaxVisibilityMapper.java .... To Rename
+
+Rename each java class in the same way as done above
+
+ hadoop com.sun.tools.javac.Main MaxVisibility*.java   ...To compile
+
+jar cf mv.jar MaxVisibility*.class .......create jar file
+
+hadoop jar mv.jar MaxVisibility spg/ncdc/90919293/2/90919293.txt output/ncdc/90919293/12
+
+hadoop fs -cat output/ncdc/90919293/12/part-r-00000
